@@ -1,0 +1,32 @@
+server:
+    port: 19001
+spring:
+    activemq:
+        broker-url: tcp://127.0.0.1:61618
+        in-memory: true
+        packages:
+            trust-all: true
+        pool:
+            enabled: false
+    application:
+        name: persistenceservice
+    jms:
+        pub-sub-domain: false
+    profiles:
+        active: dev
+    cloud:
+        inetutils:
+            # While running on dev machines
+            preferredNetworks: 192.168
+# Eureka configuration
+eureka:
+    client:
+        serviceUrl:
+            # Location of eureka server
+            defaultZone: http://localhost:8761/eureka/
+    instance:
+        # Use IP address instead of hostname at registration
+        preferIpAddress: true
+  
+
+        

@@ -1,0 +1,19 @@
+# Eureka configuration for standalone mode
+eureka:
+    client:
+        # There is no other instance from which to fetch the system state ( the registry )
+        fetch-registry: false
+        # There is no other instance with which to register
+        register-with-eureka: false
+# Logging configuration
+logging:
+    level:
+        com:
+            netflix:
+                # Disable logging for discovery
+                discovery: 'OFF'
+                # Disable logging for eureka
+                eureka: 'OFF'
+# Server port for Eureka server. Note that 8761 is also the default port
+server:
+    port: 8761

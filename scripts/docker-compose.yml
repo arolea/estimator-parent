@@ -1,0 +1,47 @@
+version: '2'
+# Define services
+services:
+  # Eureka discovery service
+  estimator-discovery-service:
+    image: estimator-discovery-service
+    ports:
+     - "8761:8761"
+    network_mode: "host"
+  # Persistence service
+  estimator-persistence-service:
+    image: estimator-persistence-service
+    depends_on:
+     - estimator-discovery-service
+    ports:
+     - "19001:19001"
+    network_mode: "host"
+  # Statistics service
+  estimator-statistics-service:
+    image: estimator-statistics-service
+    depends_on:
+     - estimator-discovery-service
+     - estimator-persistence-service
+    ports:
+     - "19003:19003"
+    network_mode: "host"
+  # GUI
+  estimator-gui:
+    image: estimator-gui
+    depends_on:
+     - estimator-discovery-service
+    ports:
+     - "19002:19002"
+    network_mode: "host"
+  # Statistics data splitter node
+  estimator-statistics-data-splitter:
+    image: estimator-statistics-data-splitter
+    depends_on:
+         - estimator-persistence-service
+    network_mode: "host"
+  # Statistics generator node
+  estimator-statistics-generator:
+    image: estimator-statistics-generator
+    depends_on:
+         - estimator-persistence-service
+    network_mode: "host"
+
